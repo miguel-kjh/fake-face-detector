@@ -8,12 +8,9 @@
     3.2. [Local binary patterns](#LBP)<br>
 4. [Detección de caras](#detección-de-caras)
 5. [Deep Learning](#deep-Learning)<br>
-    5.1. [Facenet](#Facenet)<br>
-    5.2. [Vggface](#vgg-face)<br>
-    5.3. [Openface](#Openface)<br>
-    5.4. [DeepFace](#DeepFace)<br>
-8. [Trabajos Futuros](#trabajos-futuros)
-7. [Bibliografía](#bibliografía)
+6. [Score Stacking](#score-stacking)
+7. [Trabajos Futuros](#trabajos-futuros)
+8. [Bibliografía](#bibliografía)
 
 
 ## Introducción
@@ -95,3 +92,26 @@ Antes de utilizar modelos basados en deep learning hemos elegido una región de 
   Figura 3: Ejemplo de recorte de caras
 </p>
 <br>
+
+## Deep Learning
+
+Se han elegido cuatro tipos de redes profundas para la transformación de las caras en embeddings para su clasificación.
+
+* [Facenet](https://arxiv.org/abs/1503.03832): Genera una espacio de representación de 128 dimensiones.
+* [VGG-face](https://www.robots.ox.ac.uk/~vgg/software/vgg_face/): Genera una espacio de representación de 2622 dimensiones.
+* [Openface](https://cmusatyalab.github.io/openface/): Genera una espacio de representación de 128 dimensiones.
+* [Deepface](https://ieeexplore.ieee.org/document/6909616): Genera una espacio de representación de 4096 dimensiones.
+
+Como la VGG-face y Deepface, generan despcritores de una alta dimensionalidad se han comprimido con un PCA consevando un 95% de variabilidad, de esta forma el espacio vectorial que genera VGG-face pasa de 2622 componentes a 302 y las 4096 componenetes de Deepface pasan a 641. 
+
+|                                 | Precision(%) | Recall(%) | Acc(%) |
+|:-------------------------------:|:------------:|:---------:|:------:|
+|       ROI + FaceNet + SVM       |      **57**      |   58,438  | 59,187 |
+|       ROI + FaceNet + KNN       |      53      |   40,729  | 54,778 |
+|        ROI + FaceNet + RF       |      56      |   39,375  |  57,1  |
+| ROI + FaceNet + stacking(model) |    54,164    |   61,25   | 57,324 |
+|       ROI + Openface + SVM      |    54,621    |   **61,771**  | 57,815 |
+|  ROI + VGGface + PCA(95%) + SVM |    54,305    |   53,854  | 56,885 |
+| ROI + Deepface + PCA(95%) + SVM |    56,623    |   59,792  | **59,481** |
+
+## Score Stacking
