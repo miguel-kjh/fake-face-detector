@@ -88,8 +88,8 @@ Antes de utilizar modelos basados en deep learning hemos elegido una región de 
 <br>
 
 <p align="center">
-  <img src="/Database_real_and_fake_face_160x160/real/real_00001.jpg" alt="fake_face_total">
-  <img src="/Database_real_and_fake_only_face/real/real_00001.jpg" alt="fake_face">
+  <img src="/Database_real_and_fake_face_160x160/real/real_00002.jpg" alt="fake_face_total">
+  <img src="/Database_real_and_fake_only_face/real/real_00002.jpg" alt="fake_face">
 </p>
 <p align="center">
   Figura 3: Ejemplo de recorte de caras
