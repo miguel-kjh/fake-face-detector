@@ -79,9 +79,19 @@ Se repiten los experimentos utilizando LBP.
 Antes de utilizar modelos basados en deep learning hemos elegido una región de interes en la imagen donde centrar los modelos, más concretamente se va a utilizar únicamnete la zone de la cara centrandose en la nariz, ojos y bocas de las muestras. Como detector de caras se ha empelado [retinaface](https://arxiv.org/abs/1905.00641), de media se consigue una región de interes de 114x118. Este detector funciona bien tanto para caras falsas como para reales.
 
 <p align="center">
-  <img src="/Database_real_and_fake_face_160x160/fake/easy_100_1111.jpg" alt="fake_face">
+  <img src="/Database_real_and_fake_face_160x160/fake/easy_100_1111.jpg" alt="fake_face_total">
+  <img src="/Database_real_and_fake_only_face/fake/easy_100_1111.jpg" alt="fake_face">
 </p>
 <p align="center">
-  Figura 2: Diagrama UML
+  Figura 2: Ejemplo de recorte de caras falsas
+</p>
+<br>
+
+<p align="center">
+  <img src="/Database_real_and_fake_face_160x160/real/real_00001.jpg" alt="fake_face_total">
+  <img src="/Database_real_and_fake_only_face/real/real_00001.jpg" alt="fake_face">
+</p>
+<p align="center">
+  Figura 3: Ejemplo de recorte de caras
 </p>
 <br>
