@@ -115,3 +115,14 @@ Como la VGG-face y Deepface, generan despcritores de una alta dimensionalidad se
 | ROI + Deepface + PCA(95%) + SVM |    56,623    |   59,792  | **59,481** |
 
 ## Score Stacking
+
+Una idea para mejorar la eficacia de los métodos planteados es realizar una fusión de a nivel de score, similar a una técnica de boosting pero utilizando los resultados de los clasificadores para construir un conjunto de datos donde realizar otra clasificación, en la figura  se veo un ejemplo de este estratetgía. En este caso probamos utilizar una fusión entre métodos del aprendizaje automático y los métodos del aprendijza profundo basada en SVM.
+
+<p align="center">
+  <img src="/img/score_stacking.png" alt="score stacking">
+</p>
+<p align="center">
+  Figura 3: Ejemplo de fusión de score con clasificación de sexos
+</p>
+<br>
+
