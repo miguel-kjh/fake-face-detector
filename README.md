@@ -9,8 +9,10 @@
 4. [Detección de caras](#detección-de-caras)
 5. [Deep Learning](#deep-Learning)<br>
 6. [Score Stacking](#score-stacking)
-7. [Trabajos Futuros](#trabajos-futuros)
-8. [Bibliografía](#bibliografía)
+7. [Estudio sobre las caras falsa](#estudio-sobre-caras-falsas)
+8. [Trabajos Futuros](#trabajos-futuros)
+9. [Conclusiones](#sonclusiones)
+10. [Bibliografía](#bibliografía)
 
 
 ## Introducción
@@ -100,9 +102,9 @@ Se han elegido cuatro tipos de redes profundas para la transformación de las ca
 * [Facenet](https://arxiv.org/abs/1503.03832): Genera una espacio de representación de 128 dimensiones.
 * [VGG-face](https://www.robots.ox.ac.uk/~vgg/software/vgg_face/): Genera una espacio de representación de 2622 dimensiones.
 * [Openface](https://cmusatyalab.github.io/openface/): Genera una espacio de representación de 128 dimensiones.
-* [Deepface](https://ieeexplore.ieee.org/document/6909616): Genera una espacio de representación de 4096 dimensiones.
+* [deepface](https://ieeexplore.ieee.org/document/6909616): Genera una espacio de representación de 4096 dimensiones.
 
-Como la VGG-face y Deepface, generan despcritores de una alta dimensionalidad se han comprimido con un PCA consevando un 95% de variabilidad, de esta forma el espacio vectorial que genera VGG-face pasa de 2622 componentes a 302 y las 4096 componenetes de Deepface pasan a 641. 
+Como la VGG-face y Deepface, generan despcritores de una alta dimensionalidad se han comprimido con un PCA consevando un 95% de variabilidad, de esta forma el espacio vectorial que genera VGG-face pasa de 2622 componentes a 302 y las 4096 componenetes de Deepface pasan a 641. Para trabajar con ellos se ha utilizado el framework [DeepFace](https://pypi.org/project/deepface/).
 
 |                                 | Precision(%) | Recall(%) | Acc(%) |
 |:-------------------------------:|:------------:|:---------:|:------:|
@@ -126,3 +128,42 @@ Una idea para mejorar la eficacia de los métodos planteados es realizar una fus
 </p>
 <br>
 
+Se realizan dos experimentos:
+
+1. Utilizando los resultados obtenidos con los modelos de representación de caras(Vggface, deepface, openface y facenet) con el clasificador SVM.
+
+2. Los SVM entrenados utilziando como espacio de representación HOG y LBP.
+
+Para ambos conjuntos de datos obtenidos se utiliza un SVM para la clasificación.
+
+|                         | Precision(%) | Recall(%) | Acc(%) |
+|:-----------------------:|:------------:|:---------:|:------:|
+| DL  Stacking(SVM) + SVM |    **69,342**    |   **69,062**  | **70,994** |
+| ML  Stacking(SVM) + SVM |    57,651    |   57,292  | 59,972 |
+
+
+## Estudio sobre caras falsas
+
+En este apartado se ha comparado la mejor técnica empleada, que sería la fusión de score con *Deep Learnig*, entrenando con las muestras sencillas, normales y difíciles de conjunto de caras falsas, para equilibrar los experimentos se han utilizando un número igual de muestras de caras reales elegidas aleatoriamente por cada nivel de dificultad.
+
+| DL Stacking(SVM) + SVM | Precision(%) | Recall(%) | Acc(%) |
+|:----------------------:|:------------:|:---------:|:------:|
+|        Easy(240 muestras)       |    66,514    |    67,5   | 66,667 |
+|        Mid(480 muestras)        |    **76,026**    |   **73,75**   | **75,104** |
+|        Hard(240 muestras)       |    72,182    |    72,5   | 72,083 |
+
+Observamos que el mejor conjunto es el de nivel normal, seguido de el difícil y del sencillo. Esto puede ser debido a que el normal dispone de más muestras que los otros dos y los métodos basados en reconocimiento de caras con redes profundas estas entrenados sobre todo con caras bien formadas todo lo contrario a lo que se encuentra en en conjunto sencillo, por ello es el peor de los tres.
+
+## Trabajos Futuros
+
+Como posibles trabajos futuros, viendo los resultados obtenidos con las técnicas empleadas sería interesante:
+ 
+1. El re-entrenamiento de algunos de los modelos de *Deep Learning* empleados, aunque tan solo tengamos 2061 muestras sería interesante evaluar el impacto que tendría re-entrenar parcialmente los pesos de la Vggface o la facenet para lograr una mejor representación y volver a aplicar los mismos experimentos.
+ 
+2. Utilizar [redes adaptativas de extracción de rastros de manipulación(AMTEN)](https://arxiv.org/abs/2005.04945), recientemente se han convertido en el estado del arte en la detección de imágenes manipuladas. Para la detección de caras falsas las CNN solamente aprenden representaciones del contenido de las imágenes, sin embargo, utilizar una AMTEN de preprocesamiento permite transformar una imagen eliminando su contenido y centrándose en resaltar los rastros de manipulación haciendo que las CNN posteriores generen mejores descriptores.
+
+## Conclusiones
+
+En suma, como se puede ver representando los descriptores generados con las diversas técnicas este conjunto de datos y este problema en general es bastante complejo para resolverlo simplemente con métodos clasificados desde el *Machine Learning* o el *Deep Learning*. Para llegar al 70% de *accuracy* se tuvo que idear una técnica de boosting basada en fusión del *score*, lo cual demuestra lo útil que son estas técnicas y su buen rendimiento para conseguir un espacio de representación donde lograr una mejor división o clasificación.
+ 
+En el caso de las caras falsas o de los *Deepfake* son un problema bastante complejo si no se conoce los modelos generativos que se han utilizado para generarlas o los modelos árbitros que se han empleado para entrenar las *GANs*, es evidente que lograr incidir en una mejor generación de descriptores ayuda enormemente en la detección de caras falsas.
