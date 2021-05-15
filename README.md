@@ -26,7 +26,7 @@ Para todas las combinaciones y técnicas empleadas se ha elegido como método de
 * [Random forest](https://en.wikipedia.org/wiki/Random_forest): variando el número de estimadores, la profundidad de los árboles, el tipo de división y de características.
 * [Stacking de clasficadores](https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/): se han agrupado varios tipos diferentes de clasificadores para generar un conjunto de datos basado en la puntación que generan esos modelos por cada muestra, para que después con una máquina de vectores soporte se pueda hacer una clasificación sobre ese conjunto de datos genereado.
 
-Para el ajuste de los hiper-parámetros se han utilizado las funciones *GridSearchCV* y *RandomizedSearchCV*.Además, Para la evalución de los métodos empleamos se han eligo tres métricas básicas: *precision*, *recall* y *accuracy*
+Para el ajuste de los hiper-parámetros se han utilizado las funciones *GridSearchCV* y *RandomizedSearchCV*.Además, Para la evaluación de los métodos empleamos se han escogido tres métricas básicas: *precision*, *recall* y *accuracy*
 
 
 ## Conjunto de datos
@@ -35,24 +35,24 @@ Se ha elegido una versión a menor resolución del conjunto de datos **Real and 
 
 ## Machine Learning
 
-Como técncicas de representación de imagenes clásicas se han utilizado [Histograma de gradientes orientados(HOG)](https://en.wikipedia.org/wiki/Histogram_of_oriented_gradients) y [patrones binarios locales(LBP)](https://en.wikipedia.org/wiki/Local_binary_patterns), para ambos se ha transformado la imagen en un vector de caracterisitcas y se han aplicado estas técnicas:
-
+Como técnicas de representación de imagenes clásicas se han utilizado [Histograma de gradientes orientados(HOG)](https://en.wikipedia.org/wiki/Histogram_of_oriented_gradients) y [patrones binarios locales(LBP)](https://en.wikipedia.org/wiki/Local_binary_patterns), para ambos se ha transformado la imagen en un vector de caracterisitcas y se han aplicado estas técnicas:
+ 
 * HOG: vectores de 32 dimensiones
 * LBP: vectores de 531 dimensiones
-
-Se representamos ambas técncias con un [t-SNE](https://lvdmaaten.github.io/tsne/) podemos apreciar que no generan un espacio de representación para las imagenes fácil de clasificar.
+ 
+Si epresentamos ambas técnicas con un [t-SNE](https://lvdmaaten.github.io/tsne/) podemos apreciar que no generan un espacio de representación para las imágenes fácil de clasificar.
 
 <p align="center">
   <img src="img/hog_rep.jpg" alt="vectores hog">
 </p>
 <p align="center">
-  Figura 2: Diagrama UML
+  Figura 1: Diagrama UML
 </p>
 <br>
 
 ## HOG
 
-Se ha empleado los clasificadores, junto con una variante del SVM utilizando como representación una versión compactada del HOG con un PCA conservando el 95% de variabilidad.
+Se han empleado los clasificadores, junto con una variante del SVM utilizando como representación una versión compacta del HOG con un PCA conservando el 95% de variabilidad.
 
 |                       | Precision(%) | Recall(%) | Acc(%) |
 |-----------------------|:------------:|:---------:|:------:|
@@ -75,7 +75,7 @@ Se repiten los experimentos utilizando LBP.
 
 ## Detección de caras
 
-Antes de utilizar modelos basados en deep learning hemos elegido una región de interes en la imagen donde centrar los modelos, más concretamente se va a utilizar únicamnete la zone de la cara centrandose en la nariz, ojos y bocas de las muestras. Como detector de caras se ha empelado [retinaface](https://arxiv.org/abs/1905.00641), de media se consigue una región de interes de 114x118. Este detector funciona bien tanto para caras falsas como para reales.
+Antes de utilizar modelos basados en deep learning hemos elegido una región de interés en la imagen donde centrar los modelos, más concretamente se va a utilizar únicamente la zona de la cara centrándose en la nariz, ojos y bocas de las muestras. Como detector de caras se ha empleado [retinaface](https://arxiv.org/abs/1905.00641), de media se consigue una región de interés de 114x118. Este detector funciona bien tanto para caras falsas como para reales.
 
 <p align="center">
   <img src="/Database_real_and_fake_face_160x160/fake/hard_100_1111.jpg" alt="fake_face_total">
@@ -104,7 +104,7 @@ Se han elegido cuatro tipos de redes profundas para la transformación de las ca
 * [Openface](https://cmusatyalab.github.io/openface/): Genera una espacio de representación de 128 dimensiones.
 * [deepface](https://ieeexplore.ieee.org/document/6909616): Genera una espacio de representación de 4096 dimensiones.
 
-Como la VGG-face y Deepface, generan despcritores de una alta dimensionalidad se han comprimido con un PCA consevando un 95% de variabilidad, de esta forma el espacio vectorial que genera VGG-face pasa de 2622 componentes a 302 y las 4096 componenetes de Deepface pasan a 641. Para trabajar con ellos se ha utilizado el framework [DeepFace](https://pypi.org/project/deepface/).
+Como la VGG-face y Deepface, generan descriptores de una alta dimensionalidad se han comprimido con un PCA conservando un 95% de variabilidad, de esta forma el espacio vectorial que genera VGG-face pasa de 2622 componentes a 302 y las 4096 componentes de Deepface pasan a 641. Para trabajar con ellos se ha utilizado el framework [DeepFace](https://pypi.org/project/deepface/).
 
 |                                 | Precision(%) | Recall(%) | Acc(%) |
 |:-------------------------------:|:------------:|:---------:|:------:|
@@ -118,13 +118,13 @@ Como la VGG-face y Deepface, generan despcritores de una alta dimensionalidad se
 
 ## Score Stacking
 
-Una idea para mejorar la eficacia de los métodos planteados es realizar una fusión de a nivel de score, similar a una técnica de boosting pero utilizando los resultados de los clasificadores para construir un conjunto de datos donde realizar otra clasificación, en la figura  se veo un ejemplo de este estratetgía. En este caso probamos utilizar una fusión entre métodos del aprendizaje automático y los métodos del aprendijza profundo basada en SVM.
+Una idea para mejorar la eficacia de los métodos planteados es realizar una fusión a nivel de score, similar a una técnica de boosting pero utilizando los resultados de los clasificadores para construir un conjunto de datos donde realizar otra clasificación, en la figura  se ve un ejemplo de esta estrategia. En este caso probamos utilizar una fusión entre métodos del aprendizaje automático y los métodos del aprendizaje profundo basada en SVM.
 
 <p align="center">
   <img src="/img/score_stacking.png" alt="score stacking">
 </p>
 <p align="center">
-  Figura 3: Ejemplo de fusión de score con clasificación de sexos
+  Figura 3: Ejemplo de fusión de score para clasificación de sexos
 </p>
 <br>
 
@@ -132,7 +132,7 @@ Se realizan dos experimentos:
 
 1. Utilizando los resultados obtenidos con los modelos de representación de caras(Vggface, deepface, openface y facenet) con el clasificador SVM.
 
-2. Los SVM entrenados utilziando como espacio de representación HOG y LBP.
+2. Los SVM entrenados utilizando como espacio de representación HOG y LBP.
 
 Para ambos conjuntos de datos obtenidos se utiliza un SVM para la clasificación.
 
@@ -152,7 +152,7 @@ En este apartado se ha comparado la mejor técnica empleada, que sería la fusi�
 |        Mid(480 muestras)        |    **76,026**    |   **73,75**   | **75,104** |
 |        Hard(240 muestras)       |    72,182    |    72,5   | 72,083 |
 
-Observamos que el mejor conjunto es el de nivel normal, seguido de el difícil y del sencillo. Esto puede ser debido a que el normal dispone de más muestras que los otros dos y los métodos basados en reconocimiento de caras con redes profundas estas entrenados sobre todo con caras bien formadas todo lo contrario a lo que se encuentra en en conjunto sencillo, por ello es el peor de los tres.
+Observamos que el mejor conjunto es el de nivel normal, seguido de el difícil y del sencillo. Esto puede ser debido a que el normal dispone de más muestras que los otros dos y los métodos basados en reconocimiento de caras con redes profundas están entrenados sobre todo con caras bien formadas todo lo contrario a lo que se encuentra en en conjunto sencillo, por ello es el peor de los tres.
 
 ## Trabajos Futuros
 
