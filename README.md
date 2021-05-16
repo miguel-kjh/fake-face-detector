@@ -11,9 +11,7 @@
 6. [Score Stacking](#score-stacking)
 7. [Estudio sobre las caras falsa](#estudio-sobre-caras-falsas)
 8. [Trabajos Futuros](#trabajos-futuros)
-9. [Conclusiones](#sonclusiones)
-10. [Bibliografía](#bibliografía)
-
+9. [Conclusiones](#conclusiones)
 
 ## Introducción
 
@@ -24,7 +22,7 @@ Para todas las combinaciones y técnicas empleadas se ha elegido como método de
 * [Máquina de vectores soporte](https://en.wikipedia.org/wiki/Support-vector_machine): variando los parámetros de regularización y utilizando un kernel radial.
 * [k nearest neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm): variando la k entre 5-40 vecinos y utilizando las distancia coseno y euclidea.
 * [Random forest](https://en.wikipedia.org/wiki/Random_forest): variando el número de estimadores, la profundidad de los árboles, el tipo de división y de características.
-* [Stacking de clasficadores](https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/): se han agrupado varios tipos diferentes de clasificadores para generar un conjunto de datos basado en la puntación que generan esos modelos por cada muestra, para que después con una máquina de vectores soporte se pueda hacer una clasificación sobre ese conjunto de datos genereado.
+* [Stacking de clasficadores](https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/): se han agrupado varios tipos diferentes de clasificadores(regresión logística, KNN, un árbol de decisión, SVM, red gaussiana, random forest) para generar un conjunto de datos basado en la puntación que generan esos modelos por cada muestra, para que después con una máquina de vectores soporte se pueda hacer una clasificación sobre ese conjunto de datos genereado.
 
 Para el ajuste de los hiper-parámetros se han utilizado las funciones *GridSearchCV* y *RandomizedSearchCV*.Además, Para la evaluación de los métodos empleamos se han escogido tres métricas básicas: *precision*, *recall* y *accuracy*
 
@@ -40,13 +38,14 @@ Como técnicas de representación de imagenes clásicas se han utilizado [Histog
 * HOG: vectores de 32 dimensiones
 * LBP: vectores de 531 dimensiones
  
-Si epresentamos ambas técnicas con un [t-SNE](https://lvdmaaten.github.io/tsne/) podemos apreciar que no generan un espacio de representación para las imágenes fácil de clasificar.
+Si representamos ambas técnicas con un [t-SNE](https://lvdmaaten.github.io/tsne/) podemos apreciar que no generan un espacio de representación para las imágenes fácil de clasificar.
 
 <p align="center">
-  <img src="img/hog_rep.jpg" alt="vectores hog">
+  <img src="/img/hog.png" alt="vectores hog">
+  <img src="/img/lbp.png" alt="vectores lbp">
 </p>
 <p align="center">
-  Figura 1: Diagrama UML
+  Figura 1: Representación de los descriptores obtenidos con HOG y LBP.
 </p>
 <br>
 
