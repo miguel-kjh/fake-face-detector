@@ -17,7 +17,7 @@
 
 El objetivo de este repositorio es explorar y comparar diferentes técnicas para la detección de caras falsas generadas por [modelos generativos](https://arxiv.org/abs/1406.2661). Para ello se han comparado diferentes clasificadores junto con distintivos esquemas de representación del *machine learning* clásico al *Deep Learning*.
 
-Para todas las combinaciones y técnicas empleadas se ha elegido como método de evaluación un 5-flod mediante el método *StratifiedKFold* de *scikit-learn*. Como clasificadores se han empleado los siguientes:
+Para todas las combinaciones y técnicas empleadas se ha elegido como método de evaluación un 5-flod mediante el método *StratifiedKFold* de *scikit-learn*, además se produce una normalización del conjunto de datos para establecer los valores entre [0, 1]. Como clasificadores se han empleado los siguientes:
 
 * [Máquina de vectores soporte](https://en.wikipedia.org/wiki/Support-vector_machine): variando los parámetros de regularización y utilizando un kernel radial.
 * [k nearest neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm): variando la k entre 5-40 vecinos y utilizando las distancia coseno y euclidea.
@@ -93,6 +93,8 @@ Antes de utilizar modelos basados en deep learning hemos elegido una región de 
   Figura 3: Ejemplo de recorte de caras
 </p>
 <br>
+
+Para cada cara se produce una [normalización L2](https://paulrohan.medium.com/euclidean-distance-and-normalization-of-a-vector-76f7a97abd9) antes de utilizar algunos de los modelos planteados.
 
 ## Deep Learning
 
