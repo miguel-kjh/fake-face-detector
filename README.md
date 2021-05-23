@@ -24,7 +24,7 @@ Para todas las combinaciones y técnicas empleadas se ha elegido como método de
 * [Random forest](https://en.wikipedia.org/wiki/Random_forest): variando el número de estimadores, la profundidad de los árboles, el tipo de división y de características.
 * [Stacking de clasficadores](https://machinelearningmastery.com/stacking-ensemble-machine-learning-with-python/): se han agrupado varios tipos diferentes de clasificadores(regresión logística, KNN, un árbol de decisión, SVM, red gaussiana, random forest) para generar un conjunto de datos basado en la puntación que generan esos modelos por cada muestra, para que después con una máquina de vectores soporte se pueda hacer una clasificación sobre ese conjunto de datos genereado.
 
-Para el ajuste de los hiper-parámetros se han utilizado las funciones *GridSearchCV* y *RandomizedSearchCV*.Además, Para la evaluación de los métodos empleamos se han escogido tres métricas básicas: *precision*, *recall* y *accuracy*
+Para el ajuste de los hiper-parámetros se han utilizado las funciones *GridSearchCV* (para el SVM y para el KNN) y *RandomizedSearchCV* (para el RF).Además, Para la evaluación de los métodos empleamos se han escogido tres métricas básicas: *precision*, *recall* y *accuracy*
 
 
 ## Conjunto de datos
