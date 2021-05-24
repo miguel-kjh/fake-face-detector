@@ -1,4 +1,5 @@
 # Detector de caras Falsas
+Autor: Miguel Ángel Medina Ramírez
 
 ## Índice
 1. [Introducción](#introducción)
@@ -125,7 +126,7 @@ Una idea para mejorar la eficacia de los métodos planteados es realizar una fus
   <img src="/img/score_stacking.png" alt="score stacking">
 </p>
 <p align="center">
-  Figura 3: Ejemplo de fusión de score para clasificación de sexos
+  Figura 4: Ejemplo de fusión de score para clasificación de sexos
 </p>
 <br>
 
